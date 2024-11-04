@@ -20,7 +20,6 @@ The challenge is to implement machine learning models capable of accurately iden
 ## Methods
 - **Event Selection Cuts**: Custom algorithms to filter out background noise.
 - **Machine Learning Models**: Classification models (ANN, RNN, LSTM, Decision Trees) trained to distinguish between Bi–Po coincidences and accidental events.
-- **Statistical Analysis**: Sensitivity curves for Bi–Po rates at a 90% confidence level, assuming secular equilibrium in U/Th decay chains.
 
 ## Usage
 1. Clone the repository:
