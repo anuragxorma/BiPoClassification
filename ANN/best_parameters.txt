@@ -1,0 +1,10 @@
+Best parameters:
+Best r_fv value: 1569.3812454385763
+Best t1_t2 value: 0.0014094340945954003
+Best E_bi_up value: 4.25688379063263
+Best E_bi_low value: 0.24271377307721392
+Best E_po_up value: 0.9798853067287454
+Best E_po_low value: 0.2037780345845253
+Best dist value: 618.0137118409765
+Best h_fv_up value: 1407.5842914941832
+Best h_fv_low value: -1863.8900041871013
