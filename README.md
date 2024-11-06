@@ -78,7 +78,6 @@ This project requires the following libraries:
 - Dask (for data processing)
 - Matplotlib
 - Seaborn
-
 You can install all dependencies by running:
 
 ```bash
