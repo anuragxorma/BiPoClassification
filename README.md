@@ -44,8 +44,31 @@ The repository is organized into folders that contain files for various stages o
 - **Labels**: True Bi–Po events (Bi-214, Po-214, Bi-212, Po-212), Background (both internal and external)
 
 ## Methods
-- **Event Selection Cuts**: Custom algorithms to filter out background noise.
-- **Machine Learning Models**: Classification models (ANN, RNN, LSTM, Decision Trees) trained to distinguish between Bi–Po coincidences and accidental events.
+
+### Data Preparation
+- **Data Reading**: `read_file.py` (located in `Shared_dir`) reads and loads the CSV data file for processing.
+- **Feature Engineering and Scaling**: `feature_engineering_scaling.py` standardizes and scales the input data, optimizing it for model performance.
+
+### Event Selection Cuts
+Custom algorithms are applied to filter out background noise and isolate potential Bi–Po events based on:
+- **Fiducial Volume Cut**: Reduces external interference by spatial filtering.
+- **Energy Selection**: Restricts events to specific energy ranges characteristic of Bi and Po decays.
+- **Timing Cut**: Distinguishes true Bi–Po coincidences based on the short polonium lifetimes.
+- **Distance Cut**: Minimizes background noise by limiting the spatial proximity between Bi and Po candidates.
+
+### Model Training
+- **Model Types**: Each model (ANN, RNN, LSTM, and Decision Tree) is trained separately within dedicated folders:
+  - **ANN and RNN Models**: Models are trained using neural network architectures, with trained models saved as `.h5` files for easy loading and evaluation.
+  - **Decision Tree Model**: A Decision Tree is implemented with Grid Search for hyperparameter optimization.
+  - **Potential Additions**: Non-neural models like Logistic Regression or SVM may be added in the future to compare performance and robustness against neural models.
+
+### Evaluation
+- **Evaluation Notebooks**: Separate Jupyter notebooks within each model folder provide functionality for applying the models to unseen data and assessing their accuracy.
+- **Sensitivity Curves**: Sensitivity curves are generated to evaluate the model’s performance over varying conditions and gauge its ability to distinguish true Bi–Po coincidences from background noise.
+
+### Machine Learning Models
+Classification models (ANN, RNN, LSTM, Decision Trees) are trained to differentiate between Bi–Po coincidence events and accidental background events.
+
 
 ## Usage
 1. Clone the repository:
