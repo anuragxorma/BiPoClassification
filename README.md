@@ -69,6 +69,19 @@ Custom algorithms are applied to filter out background noise and isolate potenti
 ### Machine Learning Models
 Classification models (ANN, RNN, LSTM, Decision Trees) are trained to differentiate between Bi–Po coincidence events and accidental background events.
 
+## Installation Requirements
+This project requires the following libraries:
+- Pandas
+- Numpy
+- Scikit-Learn
+- TensorFlow/Keras (for neural networks)
+- Dask (for data processing)
+- Matplotlib
+- Seaborn
+  
+You can install all dependencies by running:
+```bash
+pip install pandas numpy scikit-learn tensorflow dask matplotlib seaborn
 
 ## Usage
 1. **Clone the repository:**
