@@ -12,6 +12,32 @@ In a low-background environment, the fast Bi–Po decays are isolated from accid
 
 The challenge is to implement machine learning models capable of accurately identifying true Bi–Po events and quantifying U/Th mass limits based on detected decay rates.
 
+## Project Structure
+The repository is organized into folders that contain files for various stages of data processing, feature engineering, model training, and evaluation.
+
+### Main Branch Structure
+- **`Shared_dir`**
+  - `read_file.py`: Reads the CSV data file and processes it for model training.
+  - `feature_engineering_scaling.py`: Performs feature engineering and scaling for input data used in model training.
+
+- **Model-Specific Folders**
+  Each model has its own dedicated folder, containing Jupyter notebooks and saved models:
+  
+  - **`ANN` Folder**:
+    - **`train_model.ipynb`**: Jupyter notebook for training the Artificial Neural Network (ANN) model.
+    - **Saved Models**: The trained models are saved as `.h5` files.
+    - **`evaluate_model.ipynb`** (Planned): A notebook to apply the trained model to unseen data and evaluate performance.
+  
+  - **`RNN` Folder**:
+    - **`SimpleRNN_model.ipynb`**: Jupyter notebook for training a SimpleRNN model.
+    - **`LSTM_model.ipynb`**: Jupyter notebook for training an LSTM model.
+    - **Saved Models**: Both models are saved as `.h5` files.
+  
+  - **`Decision_Tree` Folder**:
+    - **`train_decision_tree.ipynb`**: Jupyter notebook for training a Decision Tree model with grid search for optimization.
+    - **Alternative Models** (Planned): Potential inclusion of additional models such as logistic regression.
+
+
 ## Data Sources
 - **Toy Monte Carlo Simulation of OSIRIS Detector Data**: Bi–Po decay event data from LS detectors.
 - **Features**: Spatial coordinates, energy levels, decay time intervals, and calculated distances between detected events.
