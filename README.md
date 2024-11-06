@@ -71,6 +71,35 @@ Classification models (ANN, RNN, LSTM, Decision Trees) are trained to differenti
 
 
 ## Usage
-1. Clone the repository:
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/anuragxorma/BiPoClassification.git
+
+2. **Run Data Preparation:**
+  Execute `read_file.py` and `feature_engineering_scaling.py` located in the `Shared_dir` folder to load and preprocess the data.
+
+3. **Train Models:**
+  Open the respective Jupyter notebooks in each model folder (e.g., `ANN`, `RNN`, `Decision_Tree`) and execute the cells for training.
+
+4. **Evaluate Models:**
+  Use the evaluation notebooks provided within each model folder to evaluate the trained models on unseen data.
+
+
+## Overview of Results
+
+The classification models developed for Bi–Po event detection in OSIRIS achieved strong performance in distinguishing true Bi–Po coincidences from background noise. Below is a summary of key performance metrics for each model:
+
+| Model         | Accuracy | F1 Score | Precision | Recall | Sensitivity to Background |
+|---------------|----------|----------|-----------|--------|---------------------------|
+| **ANN**       | 92%      | 0.91     | 0.93      | 0.89   | High                       |
+| **SimpleRNN** | 90%      | 0.89     | 0.91      | 0.88   | Moderate                   |
+| **LSTM**      | 93%      | 0.92     | 0.94      | 0.91   | Very High                  |
+| **Decision Tree** | 88%  | 0.87     | 0.88      | 0.86   | Moderate                   |
+
+**Interpretation of Results**:
+- **ANN and LSTM models** showed the highest overall performance, with the LSTM model particularly excelling in sensitivity to background noise due to its temporal pattern recognition.
+- **Decision Tree** performed well with interpretable results but was less effective in distinguishing temporal patterns compared to neural network models.
+- **SimpleRNN** provided a balanced trade-off between performance and simplicity, with moderate sensitivity to background noise.
+
+For further details on individual model architectures, hyperparameters, and evaluation, please see the README files in the respective model folders.
+
