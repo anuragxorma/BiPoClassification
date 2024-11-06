@@ -116,3 +116,20 @@ The classification models developed for Bi–Po event detection in OSIRIS achiev
 
 For further details on individual model architectures, hyperparameters, and evaluation, please see the README files in the respective model folders.
 
+## Project Limitations
+While the model effectively distinguishes Bi–Po events, certain rare decay events might introduce noise, limiting model sensitivity under extremely low-background conditions.
+
+## Future Work
+Future plans include:
+- Exploring additional non-neural models (e.g., SVM) for comparison.
+- Enhancing feature engineering methods for better background noise suppression.
+- Increasing interpretability through SHAP values or feature importance plots.
+
+## Contributing
+Contributions are welcome! Please submit an issue or a pull request to discuss proposed changes.
+
+## Contact
+For questions or feedback, please reach out to [anuragsarma2001@gmail.com] or open an issue on GitHub.
+
+Thank you for exploring the **BiPo Event Classification in OSIRIS** project!
+
