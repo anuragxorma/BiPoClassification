@@ -129,7 +129,7 @@ Future plans include:
 Contributions are welcome! Please submit an issue or a pull request to discuss proposed changes.
 
 ## Contact
-For questions or feedback, please reach out to [anuragsarma2001@gmail.com] or open an issue on GitHub.
+For questions or feedback, please reach out to anuragsarma2001@gmail.com or open an issue on GitHub.
 
 Thank you for exploring the **BiPo Event Classification in OSIRIS** project!
 
