@@ -80,8 +80,8 @@ This project requires the following libraries:
 - Seaborn
 You can install all dependencies by running:
 
-```bash
-pip install pandas numpy scikit-learn tensorflow dask matplotlib seaborn
+  ```bash
+  pip install pandas numpy scikit-learn tensorflow dask matplotlib seaborn
 
 ## Usage
 1. **Clone the repository:**
