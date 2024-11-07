@@ -37,12 +37,18 @@ For further details, refer to the code in the `read_file.py` file.
 The `feature_engineering_scaling.py` file applies various transformations to prepare the data for model training:
 
 - **Feature Engineering**: 
-  - Calculates time differences and distances between consecutive events.
-  - Converts `x` and `y` positions into cylindrical coordinates i.e. `r` (radial distance).
+  - Calculates **time differences** (`time_diff`) and **distances** (`distance`) between consecutive events.
+  - Converts `x` and `y` positions into **cylindrical coordinates** (`r`).
 - **Scaling**: 
   - Applies Min-Max scaling to `energy` and `r` (radial distance).
   - Applies Robust scaling to `z` and `time_diff` to handle outliers.
 - **Log Transformation**: Applies a log transformation to `distance` to avoid issues with zeros.
+- **Training Features**: The features used for model training include:
+  - **energy**: The energy associated with each event (scaled).
+  - **r**: Radial distance (scaled).
+  - **z**: The z-coordinate (Robustly scaled).
+  - **time_diff**: The time difference between consecutive events (Robustly scaled).
+  - **distance**: The Euclidean distance between consecutive events (log-transformed).
 - **Data Splitting**: 
   - Splits the dataset into two subsets based on the decay chains: BiPo-214 and BiPo-212, to prevent feature overlap issues during model training.
 
