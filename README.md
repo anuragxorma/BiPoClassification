@@ -110,12 +110,24 @@ You can install all dependencies by running:
 
 The classification models developed for Bi–Po event detection in OSIRIS achieved strong performance in distinguishing true Bi–Po coincidences from background noise. Below is a summary of key performance metrics for each model:
 
-| Model         | Accuracy | F1 Score | Precision | Recall | Sensitivity to Background |
-|---------------|----------|----------|-----------|--------|---------------------------|
-| **ANN**       | 92%      | 0.91     | 0.93      | 0.89   | High                       |
-| **SimpleRNN** | 90%      | 0.89     | 0.91      | 0.88   | Moderate                   |
-| **LSTM**      | 93%      | 0.92     | 0.94      | 0.91   | Very High                  |
-| **Decision Tree** | 88%  | 0.87     | 0.88      | 0.86   | Moderate                   |
+### BiPo-214 Chain Performance:
+
+| Model         | Accuracy | F1 Score (Weighted) | Precision (Weighted) | Recall (Weighted) | Sensitivity to Background |
+|---------------|----------|---------------------|----------------------|-------------------|---------------------------|
+| **ANN**       | 79.5%      | 0.795                | 0.8132                 | 0.7948              | Moderate                      |
+| **SimpleRNN** | 90%      | 0.89                | 0.91                 | 0.88              | Moderate                  |
+| **LSTM**      | 93%      | 0.92                | 0.94                 | 0.91              | Very High                 |
+| **Decision Tree** | 88%  | 0.87                | 0.88                 | 0.86              | Moderate                  |
+
+### BiPo-212 Chain Performance:
+
+| Model           | Accuracy | F1 Score (Weighted) | Precision (Weighted) | Recall (Weighted) | Sensitivity to Background |
+|-----------------|----------|---------------------|----------------------|-------------------|---------------------------|
+| **ANN**         | 81.62%      | 0.8175                | 0.8339                 | 0.8154              | Moderate                      |
+| **SimpleRNN**   | 75%      | 0.85                | 0.86                 | 0.80              | Moderate                  |
+| **LSTM**        | 81%      | 0.89                | 0.90                 | 0.85              | Very High                 |
+| **Decision Tree** | 72%    | 0.80                | 0.82                 | 0.78              | Moderate                  |
+
 
 **Interpretation of Results**:
 - **ANN and LSTM models** showed the highest overall performance, with the LSTM model particularly excelling in sensitivity to background noise due to its temporal pattern recognition.
