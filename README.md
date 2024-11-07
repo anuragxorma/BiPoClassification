@@ -43,6 +43,14 @@ The repository is organized into folders that contain files for various stages o
 - **Features**: Spatial coordinates, energy levels, decay time intervals, and calculated distances between detected events.
 - **Labels**: True Bi–Po events (Bi-214, Po-214, Bi-212, Po-212), Background (both internal and external)
 
+## Data Structure
+
+The dataset used for this project contains events from both the BiPo-214 and BiPo-212 decay chains. Due to the nature of the data, the chains were separated for the training of the models. This separation results in some events being classified as belonging to both chains. As a result, statistical methods will need to be developed to distinguish these overlapping classifications.
+
+One of the plans for the near future is to identify events that are classified as both BiPo-214 and BiPo-212, and devise a method to properly distinguish between them.
+
+For more detailed information about the structure of the dataset, including the specific features, labels, and preprocessing steps, please refer to the README file located in the `Shared_dir` directory of the repository.
+
 ## Methods
 
 ### Data Preparation
