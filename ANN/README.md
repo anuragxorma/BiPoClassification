@@ -5,7 +5,7 @@ This directory contains the code and training details for the Artificial Neural 
 ## Model Architecture
 
 The ANN model has a straightforward Multi-Layer Perceptron (MLP) architecture, designed as follows:
-- **Input Layer**: Matches the shape of the preprocessed feature-engineered input data.
+- **Input Layer**: Configured to match the dimensions of the preprocessed, feature-engineered input data. (For detailed information on input features, refer to the README file in the `Shared_dir` directory.)
 - **Two Hidden Layers**: Each with 256 neurons and ReLU activation, optimized for the classification task.
 - **Output Layer**: Softmax activation, providing probabilities for multiclass classification.
 
@@ -43,7 +43,13 @@ Training for both models stopped early due to the EarlyStopping callback, with p
 | F1 Score (Weighted)  | 0.795    |
 
 **Confusion Matrix**:
-[[285736 98272 4 47327] [21021 276288 10 135394] [ 0 7 433464 4] [ 34 53553 15 378655]]
+
+|              | Predicted 0 | Predicted 1 | Predicted 2 | Predicted 3 |
+|--------------|-------------|-------------|-------------|-------------|
+| **Actual 0** | 285,736     | 98,272      | 4           | 47,327      |
+| **Actual 1** | 21,021      | 276,288     | 10          | 135,394     |
+| **Actual 2** | 0           | 7           | 433,464     | 4           |
+| **Actual 3** | 34          | 53,553      | 15          | 378,655     |
 
 
 #### BiPo-212 Chain
@@ -63,7 +69,13 @@ Training for both models stopped early due to the EarlyStopping callback, with p
 | F1 Score (Weighted)  | 0.818    |
 
 **Confusion Matrix**:
-[[312592 47644 71829 6] [ 3321 370720 57003 15] [ 7247 128636 288913 13] [ 0 0 0 422891]]
+
+|              | Predicted 0 | Predicted 1 | Predicted 2 | Predicted 3 |
+|--------------|-------------|-------------|-------------|-------------|
+| **Actual 0** | 312,592     | 47,644      | 71,829      | 6           |
+| **Actual 1** | 3,321       | 370,720     | 57,003      | 15          |
+| **Actual 2** | 7,247       | 128,636     | 288,913     | 13          |
+| **Actual 3** | 0           | 0           | 0           | 422,891     |
 
 
 ## Insights and Analysis
