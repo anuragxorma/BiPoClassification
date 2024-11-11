@@ -124,16 +124,15 @@ The classification models developed for Bi–Po event detection in OSIRIS achiev
 | Model           | Accuracy | F1 Score (Weighted) | Precision (Weighted) | Recall (Weighted) | Sensitivity to Background |
 |-----------------|----------|---------------------|----------------------|-------------------|---------------------------|
 | **ANN**         | 81.62%      | 0.8175                | 0.8339                 | 0.8154              | Moderate                      |
-| **SimpleRNN**   | 75%      | 0.85                | 0.86                 | 0.80              | Moderate                  |
-| **LSTM**        | 81%      | 0.89                | 0.90                 | 0.85              | Very High                 |
+| **SimpleRNN**   | 81.62%      | 0.8174                | 0.8339                 | 0.8153              | Moderate                  |
+| **LSTM**        | 81.62%      | 0.8174                | 0.8339                 | 0.8153              | Moderate                 |
 | **Decision Tree** | 72%    | 0.80                | 0.82                 | 0.78              | Moderate                  |
 
 
 **Interpretation of Results**:
-- **ANN and LSTM models** showed the highest overall performance, with the LSTM model particularly excelling in sensitivity to background noise due to its temporal pattern recognition.
+- **ANN and RNN models** achieved similar performance across both the BiPo-214 and BiPo-212 chains, with accuracy around 79.5% and 81.6%, respectively. These models exhibited balanced performance with moderate sensitivity to background noise. They are well-suited for general event classification tasks.
+- **LSTM models** showed identical performance to the SimpleRNN in terms of accuracy, but its temporal pattern recognition capabilities give it an edge, particularly in tasks requiring sequential learning, though the sensitivity to background noise was similarly moderate.
 - **Decision Tree** performed well with interpretable results but was less effective in distinguishing temporal patterns compared to neural network models.
-- **SimpleRNN** provided a balanced trade-off between performance and simplicity, with moderate sensitivity to background noise.
-
 For further details on individual model architectures, hyperparameters, and evaluation, please see the README files in the respective model folders.
 
 ## Project Limitations
