@@ -149,7 +149,7 @@ Both SimpleRNN and LSTM models have shown strong performance in classifying BiPo
      - The **LSTM model** is likely to show similar trends, with slightly improved performance due to the model’s capacity to capture more complex patterns over time. The LSTM may be especially effective in classes where long-term dependencies are crucial for correct classification.
 
 3. **Learning Dynamics**: 
-   - Both the **SimpleRNN** and **LSTM models** were set to run for a maximum of 200 epochs. However, early stopping was employed to prevent overfitting. For the **SimpleRNN**, training was halted at epoch 74 for the BiPo-214 chain and at epoch 75 for the BiPo-212 chain. The **LSTM models** also underwent early stopping, with similar behavior expected, where training would be halted early to avoid overfitting. This strategy helped maintain stable validation performance across both models, ensuring that the models did not degrade in quality due to excessive training.
+   - Both the **SimpleRNN** and **LSTM models** were set to run for a maximum of 200 epochs. However, early stopping was employed to prevent overfitting. For the **SimpleRNN**, training was halted at epoch 69 for the BiPo-214 chain and at epoch 55 for the BiPo-212 chain. The **LSTM models** also underwent early stopping, with similar behavior expected, where training would be halted early to avoid overfitting. This strategy helped maintain stable validation performance across both models, ensuring that the models did not degrade in quality due to excessive training.
 
 4. **Limitations and Future Work**: While the SimpleRNN and LSTM models have demonstrated solid performance, there is potential for improvement.
    
