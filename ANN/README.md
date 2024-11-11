@@ -26,7 +26,7 @@ The models are compiled with categorical crossentropy loss, and the Adam optimiz
 
 Training for both models stopped early due to the EarlyStopping callback, with performance summarized as follows:
 
-#### BiPo-214 Chain
+#### 1. BiPo-214 Chain
 - **Stopped at Epoch**: 74
 - **Final Training Loss**: 0.4722
 - **Final Validation Loss**: 0.4728
@@ -52,7 +52,7 @@ Training for both models stopped early due to the EarlyStopping callback, with p
 | **Actual 3** | 34          | 53,553      | 15          | 378,655     |
 
 
-#### BiPo-212 Chain
+#### 2. BiPo-212 Chain
 - **Stopped at Epoch**: 75
 - **Final Training Loss**: 0.4341
 - **Final Validation Loss**: 0.4337
@@ -69,6 +69,22 @@ Training for both models stopped early due to the EarlyStopping callback, with p
 | F1 Score (Weighted)  | 0.818    |
 
 **Confusion Matrix**:
+
+When analyzing the confusion matrix for this chain, it is important to remember that there was a label change during the conversion from one-hot encoding to numeric labels. The original truth labels were as follows:
+
+- `0` (Internal Background)
+- `3` (External Background)
+- `4` (Bi-212)
+- `5` (Po-212)
+
+After conversion to numeric labels for the confusion matrix, the labels were adjusted as follows:
+
+- `0` remains `0` (Int. Background)
+- `3` is changed to `1` (Ext Background)
+- `4` is changed to `2` (Bi-212)
+- `5` is changed to `3` (Po-212)
+
+Therefore, the confusion matrix should be interpreted with this mapping in mind.
 
 |              | Predicted 0 | Predicted 1 | Predicted 2 | Predicted 3 |
 |--------------|-------------|-------------|-------------|-------------|
