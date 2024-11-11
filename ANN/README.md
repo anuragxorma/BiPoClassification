@@ -2,6 +2,11 @@
 
 This directory contains the code and training details for the Artificial Neural Network (ANN) models used to classify BiPo events in the OSIRIS liquid scintillator detector, specifically focusing on the BiPo-214 and BiPo-212 decay chains. These models aim to detect fast Bi-Po coincidence decays in uranium and thorium decay chains, enhancing the sensitivity of OSIRIS to extremely low U/Th concentrations in the detector.
 
+## Files
+- `Model_ANN.ipynb`: Defines and trains the ANN model for BiPo-214 and BiPo-212 chains.
+- `model_ann_214.h5`: Trained ANN model for the BiPo-214 chain.
+- `model_ann_212.h5`: Trained ANN model for the BiPo-212 chain.
+
 ## Model Architecture
 
 The ANN model has a straightforward Multi-Layer Perceptron (MLP) architecture, designed as follows:
@@ -22,7 +27,7 @@ The models are compiled with categorical crossentropy loss, and the Adam optimiz
 1. **ReduceLROnPlateau**: Reduces learning rate by 50% if validation loss plateaus for 4 consecutive epochs.
 2. **EarlyStopping**: Stops training when validation loss does not improve for 10 epochs, restoring the best model weights.
 
-### Training Results
+### Performance Metrics
 
 Training for both models stopped early due to the EarlyStopping callback, with performance summarized as follows:
 
