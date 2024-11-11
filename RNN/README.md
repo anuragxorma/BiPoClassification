@@ -12,17 +12,20 @@ This directory contains models for classifying BiPo events in the OSIRIS experim
 - `model_LSTM_214.h5`: Trained LSTM model for the BiPo-214 chain (currently unavailable but expected soon).
 - `model_LSTM_212.h5`: Trained LSTM model for the BiPo-212 chain (currently unavailable but expected soon).
 
-## Model Architecture
-Both models (SimpleRNN and LSTM) follow a similar structure:
+### Model Architecture
 
-- **Input Layer**: Takes sequences of features for training.
+Both the SimpleRNN and LSTM models follow a similar structure:
+
+- **Input Layer**: Takes sequences of features for training, which are generated in the `RNN_preprocessing.py` script. These sequences are derived from the raw features and are fed into the models for training.
 - **RNN/LSTM Layers**:
   - SimpleRNN/LSTM with 64 units and tanh activation function.
   - SimpleRNN/LSTM with 32 units and tanh activation function.
 - **Dense Layer**: 16 units with ReLU activation.
 - **Output Layer**: Softmax activation function for classification.
 
-The models use categorical cross-entropy as the loss function and Adam as the optimizer. They include early stopping and learning rate reduction callbacks to improve training stability.
+The choice of this architecture was made due to the limitations of available hardware and memory resources, as well as the absence of a GPU for model training. Given these constraints, the architecture was designed to balance performance with computational efficiency. 
+The models use **categorical cross-entropy** as the loss function and **Adam** as the optimizer. To improve training stability and prevent overfitting, **early stopping** and **learning rate reduction** callbacks are employed.
+
 
 ## Code Structure
 - `RNN_processing.py`: Preprocessing involves generating sequences from raw features and splitting the data into training and validation sets.
