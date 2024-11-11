@@ -12,7 +12,7 @@ This directory contains models for classifying BiPo events in the OSIRIS experim
 - `model_LSTM_214.h5`: Trained LSTM model for the BiPo-214 chain (currently unavailable but expected soon).
 - `model_LSTM_212.h5`: Trained LSTM model for the BiPo-212 chain (currently unavailable but expected soon).
 
-### Model Architecture
+## Model Architecture
 
 Both the SimpleRNN and LSTM models follow a similar structure:
 
@@ -26,15 +26,18 @@ Both the SimpleRNN and LSTM models follow a similar structure:
 The choice of this architecture was made due to the limitations of available hardware and memory resources, as well as the absence of a GPU for model training. Given these constraints, the architecture was designed to balance performance with computational efficiency. 
 The models use **categorical cross-entropy** as the loss function and **Adam** as the optimizer. To improve training stability and prevent overfitting, **early stopping** and **learning rate reduction** callbacks are employed.
 
+## Training Details
 
-## Code Structure
-- `RNN_processing.py`: Preprocessing involves generating sequences from raw features and splitting the data into training and validation sets.
-- `Model_SimpleRNN.ipynb`: Implements the SimpleRNN model training for both BiPo chains.
-- `Model_LSTM.ipynb`: Implements the LSTM model training for both BiPo chains.
+### Hyperparameters
+- **Epochs**: Maximum of 200 (training may stop early due to callbacks)
+- **Batch Size**: 10,000
+- **Learning Rate**: Dynamically reduced with a ReduceLROnPlateau callback
 
-## Performance Metrics
+### Callbacks
+1. **ReduceLROnPlateau**: Reduces learning rate by 50% if validation loss plateaus for 4 consecutive epochs.
+2. **EarlyStopping**: Stops training when validation loss does not improve for 10 epochs, restoring the best model weights.
 
-### SimpleRNN Model Results
+### SimpleRNN Model Performance Metrics
 
 #### 1. BiPo-214 Chain
 - **Epochs**: 69/200
@@ -100,10 +103,10 @@ Therefore, the confusion matrix should be interpreted with this mapping in mind.
 | Recall (Weighted)    | 0.8153    |
 | F1 Score (Weighted)  | 0.8174    |
 
-### LSTM Model Results
+### LSTM Model Performance Metrics
 The performance of the LSTM models is expected to be similar to the SimpleRNN models, with very close accuracy and other metrics, based on initial tests.
 
-#### BiPo-214 Chain
+#### 1. BiPo-214 Chain
 - **Epochs**: Similar to SimpleRNN, expected to stop early due to early stopping.
 - **Accuracy**: Around 0.7954 (similar to SimpleRNN).
 - **Confusion Matrix**: Similar structure to SimpleRNN results, with expected variations in label distribution.
@@ -113,7 +116,7 @@ The performance of the LSTM models is expected to be similar to the SimpleRNN mo
 - **Recall (Macro)**: Expected to be similar to SimpleRNN (~0.794584).
 - **F1 Score (Macro)**: Expected to be similar to SimpleRNN (~0.794740).
 
-#### BiPo-212 Chain
+#### 2. BiPo-212 Chain
 - **Epochs**: Similar to SimpleRNN, expected to stop early due to early stopping.
 - **Accuracy**: Around 0.8162 (similar to SimpleRNN).
 - **Confusion Matrix**: Similar structure to SimpleRNN results.
