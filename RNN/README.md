@@ -33,7 +33,7 @@ The models use categorical cross-entropy as the loss function and Adam as the op
 
 ### SimpleRNN Model Results
 
-#### BiPo-214 Chain
+#### 1. BiPo-214 Chain
 - **Epochs**: 69/200
 - **Loss**: 0.4720
 - **Accuracy**: 0.7954
@@ -57,7 +57,7 @@ The models use categorical cross-entropy as the loss function and Adam as the op
 | Recall (Weighted)    | 0.7947    |
 | F1 Score (Weighted)  | 0.7948    |
 
-#### BiPo-212 Chain
+#### 2. BiPo-212 Chain
 - **Epochs**: 55/200
 - **Loss**: 0.4342
 - **Accuracy**: 0.8162
@@ -65,6 +65,22 @@ The models use categorical cross-entropy as the loss function and Adam as the op
 - **Validation Accuracy**: 0.8163
 
 **Confusion Matrix**:
+When analyzing the confusion matrix for this chain, it is important to remember that there was a label change during the conversion from one-hot encoding to numeric labels. The original truth labels were as follows:
+
+- `0` (Internal Background)
+- `3` (External Background)
+- `4` (Bi-212)
+- `5` (Po-212)
+
+After conversion to numeric labels for the confusion matrix, the labels were adjusted as follows:
+
+- `0` remains `0` (Int. Background)
+- `3` is changed to `1` (Ext Background)
+- `4` is changed to `2` (Bi-212)
+- `5` is changed to `3` (Po-212)
+
+Therefore, the confusion matrix should be interpreted with this mapping in mind.
+
 |              | Predicted 0 | Predicted 1 | Predicted 2 | Predicted 3 |
 |--------------|-------------|-------------|-------------|-------------|
 | **Actual 0** | 312,221     | 47,413      | 72,429        | 4      |
