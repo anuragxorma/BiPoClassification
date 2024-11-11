@@ -115,8 +115,8 @@ The classification models developed for Bi–Po event detection in OSIRIS achiev
 | Model         | Accuracy | F1 Score (Weighted) | Precision (Weighted) | Recall (Weighted) | Sensitivity to Background |
 |---------------|----------|---------------------|----------------------|-------------------|---------------------------|
 | **ANN**       | 79.5%      | 0.795                | 0.8132                 | 0.7948              | Moderate                      |
-| **SimpleRNN** | 90%      | 0.89                | 0.91                 | 0.88              | Moderate                  |
-| **LSTM**      | 93%      | 0.92                | 0.94                 | 0.91              | Very High                 |
+| **SimpleRNN** | 79.54%      | 0.7948                | 0.8129                 | 0.7947              | Moderate                  |
+| **LSTM**      | 79.54%      | 0.79.48                | 0.8129                 | 0.7947              | Moderate                 |
 | **Decision Tree** | 88%  | 0.87                | 0.88                 | 0.86              | Moderate                  |
 
 ### BiPo-212 Chain Performance:
