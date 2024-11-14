@@ -24,16 +24,17 @@ The repository is organized into folders that contain files for various stages o
   Each model has its own dedicated folder, containing Jupyter notebooks and saved models:
   
   - **`ANN` Folder**:
-    - **`train_model.ipynb`**: Jupyter notebook for training the Artificial Neural Network (ANN) model.
+    - **`Model_ANN.ipynb`**: Jupyter notebook for training the Artificial Neural Network (ANN) model.
     - **Saved Models**: The trained models are saved as `.h5` files.
     - **`evaluate_model.ipynb`** (Planned): A notebook to apply the trained model to unseen data and evaluate performance.
   
   - **`RNN` Folder**:
-    - **`SimpleRNN_model.ipynb`**: Jupyter notebook for training a SimpleRNN model.
-    - **`LSTM_model.ipynb`**: Jupyter notebook for training an LSTM model.
+    - **`RNN_preprocessing.py`**: Creates sequences for the RNN models
+    - **`Model_SimpleRNN.ipynb`**: Jupyter notebook for training a SimpleRNN model.
+    - **`Model_LSTM.ipynb`**: Jupyter notebook for training an LSTM model.
     - **Saved Models**: Both models are saved as `.h5` files.
   
-  - **`Decision_Tree` Folder**:
+  - **`Decision_Tree` Folder** (planned):
     - **`train_decision_tree.ipynb`**: Jupyter notebook for training a Decision Tree model with grid search for optimization.
     - **Alternative Models** (Planned): Potential inclusion of additional models such as logistic regression.
 
@@ -58,21 +59,18 @@ For more detailed information about the structure of the dataset, including the 
 - **Feature Engineering and Scaling**: `feature_engineering_scaling.py` standardizes and scales the input data, optimizing it for model performance.
 
 ### Event Selection Cuts
-Custom algorithms are applied to filter out background noise and isolate potential Bi–Po events based on:
+Classically, custom algorithms (to be added soon) are applied to filter out background noise and isolate potential Bi–Po events based on:
 - **Fiducial Volume Cut**: Reduces external interference by spatial filtering.
 - **Energy Selection**: Restricts events to specific energy ranges characteristic of Bi and Po decays.
 - **Timing Cut**: Distinguishes true Bi–Po coincidences based on the short polonium lifetimes.
 - **Distance Cut**: Minimizes background noise by limiting the spatial proximity between Bi and Po candidates.
+  This method is not very efficient. Hence, machine learning techniques are implemented to better classify the important events from the background.
 
 ### Model Training
 - **Model Types**: Each model (ANN, RNN, LSTM, and Decision Tree) is trained separately within dedicated folders:
   - **ANN and RNN Models**: Models are trained using neural network architectures, with trained models saved as `.h5` files for easy loading and evaluation.
-  - **Decision Tree Model**: A Decision Tree is implemented with Grid Search for hyperparameter optimization.
+  - **Decision Tree Model**: A Decision Tree will be implemented with Grid Search for hyperparameter optimization.
   - **Potential Additions**: Non-neural models like Logistic Regression or SVM may be added in the future to compare performance and robustness against neural models.
-
-### Evaluation
-- **Evaluation Notebooks**: Separate Jupyter notebooks within each model folder provide functionality for applying the models to unseen data and assessing their accuracy.
-- **Sensitivity Curves**: Sensitivity curves are generated to evaluate the model’s performance over varying conditions and gauge its ability to distinguish true Bi–Po coincidences from background noise.
 
 ### Machine Learning Models
 Classification models (ANN, RNN, LSTM, Decision Trees) are trained to differentiate between Bi–Po coincidence events and accidental background events.
@@ -117,7 +115,6 @@ The classification models developed for Bi–Po event detection in OSIRIS achiev
 | **ANN**       | 79.5%      | 0.795                | 0.8132                 | 0.7948              | Moderate                      |
 | **SimpleRNN** | 79.54%      | 0.7948                | 0.8129                 | 0.7947              | Moderate                  |
 | **LSTM**      | 79.54%      | 0.79.48                | 0.8129                 | 0.7947              | Moderate                 |
-| **Decision Tree** | 88%  | 0.87                | 0.88                 | 0.86              | Moderate                  |
 
 ### BiPo-212 Chain Performance:
 
@@ -126,13 +123,12 @@ The classification models developed for Bi–Po event detection in OSIRIS achiev
 | **ANN**         | 81.62%      | 0.8175                | 0.8339                 | 0.8154              | Moderate                      |
 | **SimpleRNN**   | 81.62%      | 0.8174                | 0.8339                 | 0.8153              | Moderate                  |
 | **LSTM**        | 81.62%      | 0.8174                | 0.8339                 | 0.8153              | Moderate                 |
-| **Decision Tree** | 72%    | 0.80                | 0.82                 | 0.78              | Moderate                  |
 
 
 **Interpretation of Results**:
 - **ANN and RNN models** achieved similar performance across both the BiPo-214 and BiPo-212 chains, with accuracy around 79.5% and 81.6%, respectively. These models exhibited balanced performance with moderate sensitivity to background noise. They are well-suited for general event classification tasks.
 - **LSTM models** showed identical performance to the SimpleRNN in terms of accuracy, but its temporal pattern recognition capabilities give it an edge, particularly in tasks requiring sequential learning, though the sensitivity to background noise was similarly moderate.
-- **Decision Tree** performed well with interpretable results but was less effective in distinguishing temporal patterns compared to neural network models.
+- **Decision Tree** is expected to perform similarly to the previous models.
 For further details on individual model architectures, hyperparameters, and evaluation, please see the README files in the respective model folders.
 
 ## Project Limitations
