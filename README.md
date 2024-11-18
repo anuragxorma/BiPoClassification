@@ -34,8 +34,9 @@ The repository is organized into folders that contain files for various stages o
     - **`Model_LSTM.ipynb`**: Jupyter notebook for training an LSTM model.
     - **Saved Models**: Both models are saved as `.h5` files.
   
-  - **`Decision_Tree` Folder** (planned):
-    - **`train_decision_tree.ipynb`**: Jupyter notebook for training a Decision Tree model with grid search for optimization.
+  - **`Decision_Tree` Folder**:
+    - **`Model_decision_tree.ipynb`**: Jupyter notebook for training a Decision Tree model with grid search for optimization.
+    - **Saved Models**: The trained models are saved as `.pkl` files.
     - **Alternative Models** (Planned): Potential inclusion of additional models such as logistic regression.
 
 
@@ -69,7 +70,7 @@ Classically, custom algorithms (to be added soon) are applied to filter out back
 ### Model Training
 - **Model Types**: Each model (ANN, RNN, LSTM, and Decision Tree) is trained separately within dedicated folders:
   - **ANN and RNN Models**: Models are trained using neural network architectures, with trained models saved as `.h5` files for easy loading and evaluation.
-  - **Decision Tree Model**: A Decision Tree will be implemented with Grid Search for hyperparameter optimization.
+  - **Decision Tree Model**: A Decision Tree is implemented with Grid Search for hyperparameter optimization.
   - **Potential Additions**: Non-neural models like Logistic Regression or SVM may be added in the future to compare performance and robustness against neural models.
 
 ### Machine Learning Models
@@ -84,10 +85,11 @@ This project requires the following libraries:
 - Dask (for data processing)
 - Matplotlib
 - Seaborn
+- joblib
 You can install all dependencies by running:
 
   ```bash
-  pip install pandas numpy scikit-learn tensorflow dask matplotlib seaborn
+  pip install pandas numpy scikit-learn tensorflow dask matplotlib seaborn joblib
 
 ## Usage
 1. **Clone the repository:**
@@ -114,7 +116,8 @@ The classification models developed for Bi–Po event detection in OSIRIS achiev
 |---------------|----------|---------------------|----------------------|-------------------|---------------------------|
 | **ANN**       | 79.5%      | 0.795                | 0.8132                 | 0.7948              | Moderate                      |
 | **SimpleRNN** | 79.54%      | 0.7948                | 0.8129                 | 0.7947              | Moderate                  |
-| **LSTM**      | 79.54%      | 0.79.48                | 0.8129                 | 0.7947              | Moderate                 |
+| **LSTM**      | 79.54%      | 0.7948                | 0.8129                 | 0.7947              | Moderate                 |
+| **Decision Tree**      | 79.41%      | 0.7938                | 0.8136                 | 0.7938              | Moderate                 |
 
 ### BiPo-212 Chain Performance:
 
@@ -123,10 +126,11 @@ The classification models developed for Bi–Po event detection in OSIRIS achiev
 | **ANN**         | 81.62%      | 0.8175                | 0.8339                 | 0.8154              | Moderate                      |
 | **SimpleRNN**   | 81.62%      | 0.8174                | 0.8339                 | 0.8153              | Moderate                  |
 | **LSTM**        | 81.62%      | 0.8174                | 0.8339                 | 0.8153              | Moderate                 |
+| **Decision Tree**        | 81.51%      | 0.8167                | 0.8342                 | 0.8143              | Moderate                 |
 
 
 **Interpretation of Results**:
-- **ANN and RNN models** achieved similar performance across both the BiPo-214 and BiPo-212 chains, with accuracy around 79.5% and 81.6%, respectively. These models exhibited balanced performance with moderate sensitivity to background noise. They are well-suited for general event classification tasks.
+- **ANN and RNN models** achieved the best performance across both BiPo-214 and BiPo-212 chains, with accuracy values of ~79.5% and ~81.6%, respectively. These models demonstrated balanced performance metrics with moderate sensitivity to background noise, making them well-suited for general event classification tasks.
 - **LSTM models** showed identical performance to the SimpleRNN in terms of accuracy, but its temporal pattern recognition capabilities give it an edge, particularly in tasks requiring sequential learning, though the sensitivity to background noise was similarly moderate.
 - **Decision Tree** is expected to perform similarly to the previous models.
 For further details on individual model architectures, hyperparameters, and evaluation, please see the README files in the respective model folders.
