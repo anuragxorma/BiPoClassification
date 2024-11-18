@@ -132,7 +132,9 @@ The classification models developed for Bi–Po event detection in OSIRIS achiev
 **Interpretation of Results**:
 - **ANN and RNN models** achieved the best performance across both BiPo-214 and BiPo-212 chains, with accuracy values of ~79.5% and ~81.6%, respectively. These models demonstrated balanced performance metrics with moderate sensitivity to background noise, making them well-suited for general event classification tasks.
 - **LSTM models** showed identical performance to the SimpleRNN in terms of accuracy, but its temporal pattern recognition capabilities give it an edge, particularly in tasks requiring sequential learning, though the sensitivity to background noise was similarly moderate.
-- **Decision Tree** is expected to perform similarly to the previous models.
+- **Decision Tree**  in their unoptimized form, initially showed lower accuracy (~71.2% for BiPo-214 and ~73.8% for BiPo-212) compared to the neural network models. However, after applying hyperparameter tuning, the performance improved significantly. The optimized Decision Trees achieved accuracies closer to 79.4% for BiPo-214 and 81.5% for BiPo-212, with F1 scores of 0.7938 and 0.8167, respectively, demonstrating a noticeable enhancement.
+- Decision Trees, in their optimized state, are no longer just a reliable baseline. They can serve as a key component in ensemble methods, like Random Forests or Gradient Boosting, to further boost model stability and predictive power. This approach mitigates the tendency of standalone Decision Trees to overfit or underperform in complex classification tasks, ultimately enhancing their performance and generalizability.
+  
 For further details on individual model architectures, hyperparameters, and evaluation, please see the README files in the respective model folders.
 
 ## Project Limitations
