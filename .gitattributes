@@ -1,0 +1,2 @@
+*.csv filter=lfs diff=lfs merge=lfs -text
+data_preprocessing/osiris_toydata_7.csv filter=lfs diff=lfs merge=lfs -text
