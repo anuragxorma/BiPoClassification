@@ -215,7 +215,7 @@ plt.show()
 ###BiPo212###
 
 # Fit energy distributions for Bi212
-bi_energy = df_pandas[df_pandas.truth == 2].energy.values
+bi_energy = df_pandas[df_pandas.truth == 4].energy.values
 hist_bi, bin_edges_bi = np.histogram(bi_energy, bins=100)
 bin_centers_bi = (bin_edges_bi[:-1] + bin_edges_bi[1:]) / 2
 
