@@ -264,3 +264,31 @@ plt.legend()
 plt.grid()
 plt.savefig('plots/data_viz/gaussian_fit_po212.png')
 plt.show()
+
+###EXTERNAL BACKGROUND
+
+# Filter for truth label 3 (external gamma events)
+df_truth3 = df_pandas[df_pandas.truth == 3]
+
+# Compute radial distance r = sqrt(x² + y²)
+df_truth3['r'] = np.sqrt(df_truth3['x']**2 + df_truth3['y']**2)
+
+# Plot histogram of z-coordinate
+plt.figure(figsize=(10, 5))
+plt.hist(df_truth3.z, bins=100, color='purple', alpha=0.7)
+plt.xlabel('z-coordinate [mm]')
+plt.ylabel('Number of Events')
+plt.title('Z-coordinate Distribution of External Background (Truth 3)')
+plt.grid(True)
+plt.savefig('plots/data_viz/z_distribution_truth3.png')
+plt.show()
+
+# Plot histogram of radial distance r
+plt.figure(figsize=(10, 5))
+plt.hist(df_truth3['r'], bins=100, color='green', alpha=0.7)
+plt.xlabel(r'Radial Distance r = $\sqrt{x^2 + y^2}$ [mm]')
+plt.ylabel('Number of Events')
+plt.title('Radial Distribution of External Background (Truth 3)')
+plt.grid(True)
+plt.savefig('plots/data_viz/r_distribution_truth3.png')
+plt.show()
