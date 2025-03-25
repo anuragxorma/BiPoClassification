@@ -75,13 +75,17 @@ plt.grid(True)
 plt.savefig('plots/data_viz/energy_po214_po212.png')
 plt.show()
 
+# Define label names
+label_names = {1: "Bi214", 2: "Po214", 4: "Bi212", 5: "Po212"}
+
 # Plot histogram of all energies with truth distributions
 plt.figure(figsize=(12, 6))
 plt.hist(df_pandas.energy, bins=200, color='gray', alpha=0.5, label='All Events')
 
-# Overlay histograms for individual truth labels
+# Overlay histograms for individual truth labels with updated legend
 for label, color in zip([1, 2, 4, 5], ['blue', 'red', 'green', 'black']):
-    plt.hist(df_pandas[df_pandas.truth == label].energy, bins=100, alpha=0.5, color=color, label=f'Truth {label}')
+    plt.hist(df_pandas[df_pandas.truth == label].energy, bins=100, alpha=0.5, color=color, 
+             label=f'{label_names[label]} (Label {label})')
 
 plt.xlabel('Energy [MeV]')
 plt.ylabel('Number of Events')
@@ -89,6 +93,23 @@ plt.title('Overall Energy Distribution with Individual Truth Contributions')
 plt.legend()
 plt.grid(True)
 plt.savefig('plots/data_viz/all_energy_distribution.png')
+plt.show()
+
+#  Second plot with log scale on the y-axis
+plt.figure(figsize=(12, 6))
+plt.hist(df_pandas.energy, bins=200, color='gray', alpha=0.5, label='All Events')
+
+for label, color in zip([1, 2, 4, 5], ['blue', 'red', 'green', 'black']):
+    plt.hist(df_pandas[df_pandas.truth == label].energy, bins=100, alpha=0.5, color=color, 
+             label=f'{label_names[label]} (Label {label})')
+
+plt.xlabel('Energy [MeV]')
+plt.ylabel('Number of Events (Log Scale)')
+plt.title('Overall Energy Distribution with Log Scale')
+plt.yscale('log')  # Apply log scale to y-axis
+plt.legend()
+#plt.grid(True, which='both', linestyle='--', linewidth=0.5)
+plt.savefig('plots/data_viz/all_energy_distribution_log.png')
 plt.show()
 
 
@@ -130,7 +151,7 @@ plt.figure(figsize=(10, 5))
 plt.scatter(bin_centers_1, hist_1, label='BiPo214', color='blue', alpha=0.6)
 plt.plot(bin_centers_1, decay_function(bin_centers_1, *popt_1), label=fr'Fit: $\tau$={tau_1:.3e}s', color='black')
 plt.xlabel('Time (seconds)')
-plt.ylabel('Number of Events')
+plt.ylabel('Number of BiPo Events')
 plt.title('Decay Curve Fitting (BiPo214)')
 plt.legend()
 plt.grid()
@@ -147,7 +168,7 @@ plt.plot(
     color='black'
 )
 plt.xlabel('Time (seconds)')
-plt.ylabel('Number of Events')
+plt.ylabel('Number of BiPo Events')
 plt.title('Decay Curve Fitting (BiPo212)')
 plt.legend()
 plt.grid()
@@ -161,44 +182,33 @@ from scipy.stats import norm
 def gaussian(x, A, mu, sigma):
     return A * np.exp(-(x - mu)**2 / (2 * sigma**2))
 
-# Fit energy distributions for Bi214 and Bi212
-bi_energy = df_pandas[df_pandas.truth == 1].energy.values
-hist_bi, bin_edges_bi = np.histogram(bi_energy, bins=100)
-bin_centers_bi = (bin_edges_bi[:-1] + bin_edges_bi[1:]) / 2
+# Define label colors
+label_colors = {1: "blue", 2: "red"}
 
-popt_bi, _ = curve_fit(gaussian, bin_centers_bi, hist_bi, p0=[max(hist_bi), np.mean(bi_energy), np.std(bi_energy)])
-A_bi, mu_bi, sigma_bi = popt_bi
+# Bi214 Histogram (No Fit)
+bi214_energy = df_pandas[df_pandas.truth == 1].energy.values
+plt.figure(figsize=(10, 5))
+plt.hist(bi214_energy, bins=100, color=label_colors[1], alpha=0.6, label='Bi214 Data')
+plt.xlabel('Energy [MeV]')
+plt.ylabel('Number of Events')
+plt.title('Bi214 Energy Distribution')
+plt.legend()
+plt.grid()
+plt.savefig('plots/data_viz/histogram_bi214.png')
+plt.show()
 
-print(f"Bi214 Energy Peak: {mu_bi:.3f} MeV, Width: {sigma_bi:.3f} MeV")
-
-# Fit energy distributions for Po214 and Po212
-po_energy = df_pandas[df_pandas.truth == 2].energy.values
-hist_po, bin_edges_po = np.histogram(po_energy, bins=100)
+# Po214 Gaussian Fit
+po214_energy = df_pandas[df_pandas.truth == 2].energy.values
+hist_po, bin_edges_po = np.histogram(po214_energy, bins=100)
 bin_centers_po = (bin_edges_po[:-1] + bin_edges_po[1:]) / 2
 
-popt_po, _ = curve_fit(gaussian, bin_centers_po, hist_po, p0=[max(hist_po), np.mean(po_energy), np.std(po_energy)])
+popt_po, _ = curve_fit(gaussian, bin_centers_po, hist_po, p0=[max(hist_po), np.mean(po214_energy), np.std(po214_energy)])
 A_po, mu_po, sigma_po = popt_po
 
 print(f"Po214 Energy Peak: {mu_po:.3f} MeV, Width: {sigma_po:.3f} MeV")
 
-# Plot fitted energy distributions
 plt.figure(figsize=(10, 5))
-plt.hist(bi_energy, bins=100, color='blue', alpha=0.6, label='Bi214 Data')
-plt.plot(bin_centers_bi, gaussian(bin_centers_bi, *popt_bi), color='black', 
-         label=fr'Fit: $\mu$={mu_bi:.3f} MeV, $\sigma$={sigma_bi:.3f} MeV')
-plt.axvline(mu_bi, color='black', linestyle='dashed', label='Mean (μ)')
-plt.axvline(mu_bi - sigma_bi, color='gray', linestyle='dashed', alpha=0.7, label='μ - σ')
-plt.axvline(mu_bi + sigma_bi, color='gray', linestyle='dashed', alpha=0.7, label='μ + σ')
-plt.xlabel('Energy [MeV]')
-plt.ylabel('Number of Events')
-plt.title('Gaussian Fit for Bi214 Energy')
-plt.legend()
-plt.grid()
-plt.savefig('plots/data_viz/gaussian_fit_bi214.png')
-plt.show()
-
-plt.figure(figsize=(10, 5))
-plt.hist(po_energy, bins=100, color='red', alpha=0.6, label='Po214 Data')
+plt.hist(po214_energy, bins=100, color=label_colors[2], alpha=0.6, label='Po214 Data')
 plt.plot(bin_centers_po, gaussian(bin_centers_po, *popt_po), color='black', 
          label=fr'Fit: $\mu$={mu_po:.3f} MeV, $\sigma$={sigma_po:.3f} MeV')
 plt.axvline(mu_po, color='black', linestyle='dashed', label='Mean (μ)')
@@ -212,46 +222,30 @@ plt.grid()
 plt.savefig('plots/data_viz/gaussian_fit_po214.png')
 plt.show()
 
-###BiPo212###
+# Bi212 Histogram (No Fit)
+bi212_energy = df_pandas[df_pandas.truth == 4].energy.values
+plt.figure(figsize=(10, 5))
+plt.hist(bi212_energy, bins=100, color=label_colors[1], alpha=0.6, label='Bi212 Data')
+plt.xlabel('Energy [MeV]')
+plt.ylabel('Number of Events')
+plt.title('Bi212 Energy Distribution')
+plt.legend()
+plt.grid()
+plt.savefig('plots/data_viz/histogram_bi212.png')
+plt.show()
 
-# Fit energy distributions for Bi212
-bi_energy = df_pandas[df_pandas.truth == 4].energy.values
-hist_bi, bin_edges_bi = np.histogram(bi_energy, bins=100)
-bin_centers_bi = (bin_edges_bi[:-1] + bin_edges_bi[1:]) / 2
-
-popt_bi, _ = curve_fit(gaussian, bin_centers_bi, hist_bi, p0=[max(hist_bi), np.mean(bi_energy), np.std(bi_energy)])
-A_bi, mu_bi, sigma_bi = popt_bi
-
-print(f"Bi212 Energy Peak: {mu_bi:.3f} MeV, Width: {sigma_bi:.3f} MeV")
-
-# Fit energy distributions for Po214 and Po212
-po_energy = df_pandas[df_pandas.truth == 5].energy.values
-hist_po, bin_edges_po = np.histogram(po_energy, bins=100)
+# Po212 Gaussian Fit
+po212_energy = df_pandas[df_pandas.truth == 5].energy.values
+hist_po, bin_edges_po = np.histogram(po212_energy, bins=100)
 bin_centers_po = (bin_edges_po[:-1] + bin_edges_po[1:]) / 2
 
-popt_po, _ = curve_fit(gaussian, bin_centers_po, hist_po, p0=[max(hist_po), np.mean(po_energy), np.std(po_energy)])
+popt_po, _ = curve_fit(gaussian, bin_centers_po, hist_po, p0=[max(hist_po), np.mean(po212_energy), np.std(po212_energy)])
 A_po, mu_po, sigma_po = popt_po
 
 print(f"Po212 Energy Peak: {mu_po:.3f} MeV, Width: {sigma_po:.3f} MeV")
 
-# Plot fitted energy distributions
 plt.figure(figsize=(10, 5))
-plt.hist(bi_energy, bins=100, color='blue', alpha=0.6, label='Bi212 Data')
-plt.plot(bin_centers_bi, gaussian(bin_centers_bi, *popt_bi), color='black', 
-         label=fr'Fit: $\mu$={mu_bi:.3f} MeV, $\sigma$={sigma_bi:.3f} MeV')
-plt.axvline(mu_bi, color='black', linestyle='dashed', label='Mean (μ)')
-plt.axvline(mu_bi - sigma_bi, color='gray', linestyle='dashed', alpha=0.7, label='μ - σ')
-plt.axvline(mu_bi + sigma_bi, color='gray', linestyle='dashed', alpha=0.7, label='μ + σ')
-plt.xlabel('Energy [MeV]')
-plt.ylabel('Number of Events')
-plt.title('Gaussian Fit for Bi212 Energy')
-plt.legend()
-plt.grid()
-plt.savefig('plots/data_viz/gaussian_fit_bi212.png')
-plt.show()
-
-plt.figure(figsize=(10, 5))
-plt.hist(po_energy, bins=100, color='red', alpha=0.6, label='Po212 Data')
+plt.hist(po212_energy, bins=100, color=label_colors[2], alpha=0.6, label='Po212 Data')
 plt.plot(bin_centers_po, gaussian(bin_centers_po, *popt_po), color='black', 
          label=fr'Fit: $\mu$={mu_po:.3f} MeV, $\sigma$={sigma_po:.3f} MeV')
 plt.axvline(mu_po, color='black', linestyle='dashed', label='Mean (μ)')
@@ -278,7 +272,7 @@ plt.figure(figsize=(10, 5))
 plt.hist(df_truth3.z, bins=100, color='purple', alpha=0.7)
 plt.xlabel('z-coordinate [mm]')
 plt.ylabel('Number of Events')
-plt.title('Z-coordinate Distribution of External Background (Truth 3)')
+plt.title('Z-coordinate Distribution of External Background (Label 3)')
 plt.grid(True)
 plt.savefig('plots/data_viz/z_distribution_truth3.png')
 plt.show()
@@ -288,7 +282,7 @@ plt.figure(figsize=(10, 5))
 plt.hist(df_truth3['r'], bins=100, color='green', alpha=0.7)
 plt.xlabel(r'Radial Distance r = $\sqrt{x^2 + y^2}$ [mm]')
 plt.ylabel('Number of Events')
-plt.title('Radial Distribution of External Background (Truth 3)')
+plt.title('Radial Distribution of External Background (Label 3)')
 plt.grid(True)
 plt.savefig('plots/data_viz/r_distribution_truth3.png')
 plt.show()
