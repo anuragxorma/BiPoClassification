@@ -8,33 +8,38 @@ from sklearn.model_selection import train_test_split
 
 def create_sequences(X, y, seq_length):
     # Convert to NumPy arrays if not already
-    X = np.array(X)
+    X_np = X.to_numpy(dtype=np.float64)
     y = np.array(y)
     
     # Create sequences using stride_tricks
-    num_sequences = len(X) - seq_length + 1
+    num_sequences = len(X_np) - seq_length + 1
     Xs = np.lib.stride_tricks.as_strided(
-        X,
-        shape=(num_sequences, seq_length, X.shape[1]),
-        strides=(X.strides[0], X.strides[0], X.strides[1])
+        X_np,
+        shape=(num_sequences, seq_length, X_np.shape[1]),
+        strides=(X_np.strides[0], X_np.strides[0], X_np.strides[1])
     )
 
-     # Create sequences for labels using stride_tricks
+    # Create sequences for labels using stride_tricks
     ys = np.lib.stride_tricks.as_strided(
         y,
         shape=(num_sequences, seq_length, y.shape[1]),
         strides=(y.strides[0], y.strides[0], y.strides[1])
     )
     
-    # Initialize features
+    # Initialize feature indices
     time_column_idx = 4  # time is the 5th feature
     r_column_idx = 1     # r is the 2nd feature
     z_column_idx = 2     # z is the 3rd feature
     phi_column_idx = 3   # phi is the 4th feature
 
-    # Compute relative time differences both ways
+    # Compute relative time differences
     relative_time_diffs = Xs[:, :, time_column_idx] - Xs[:, 0, time_column_idx][:, None]
-    Xs[:, :, time_column_idx] = relative_time_diffs
+
+    # Remove the original time column
+    Xs = np.delete(Xs, time_column_idx, axis=2)
+
+    # Append relative time differences as a new feature
+    Xs = np.concatenate((Xs, relative_time_diffs[:, :, None]), axis=2)
 
     # Extract r, z, phi columns
     r = Xs[:, :, r_column_idx]
