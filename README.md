@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-OSIRIS is the pre-detector of the JUNO experiment, designed to measure radiopurity in the liquid scintillator (LS) through the identification of fast Bi–Po coincidence decays. These decays, originating from the $^{214}$Bi–Po and $^{212}$Bi–Po chains, are critical for estimating uranium and thorium content and suppressing backgrounds in neutrino detection.
+OSIRIS is the pre-detector of the JUNO experiment, designed to measure radiopurity in the liquid scintillator (LS) through the identification of fast Bi–Po coincidence decays. These decays, originating from the <sup>214</sup>Bi–Po and <sup>212</sup>Bi–Po chains, are critical for estimating uranium and thorium content and suppressing backgrounds in neutrino detection.
 
 This project explores the use of machine learning (ML) to classify BiPo events more effectively than traditional selection cuts. A variety of ML models are trained and compared to classical and optimized cuts in terms of classification performance and physical consistency.
 
@@ -84,7 +84,7 @@ The repository is organized by task:
 ## Dataset
 
 - **Source**: Toy Monte Carlo simulation of OSIRIS detector data.
-- **Classes**: Internal Background (Label 0), $^{214}$Bi (Label 1), $^{214}$Po (Label 2), External Background (Label 3), $^{212}$Bi (Label 4), $^{212}$Po (Label 5)
+- **Classes**: Internal Background (Label 0), <sup>214</sup>Bi (Label 1), <sup>214</sup>Po (Label 2), External Background (Label 3), <sup>212</sup>Bi (Label 4), <sup>212</sup>Po (Label 5)
 - **Features**: Event Time in seconds, photoevents (to be converted to energy by dividing by 280), Spatial coordinates(x, y, z)
 - **Preprocessing**:
   - Feature engineering of cylindrical coordinates
@@ -169,7 +169,7 @@ This project compares:
 
 ### Results
 
-| Method                        | $^{214}$BiPo TPR | Efficiency | $^{212}$BiPo TPR | Efficiency |
+| Method                        | <sup>214</sup>BiPo TPR | Efficiency | <sup>212</sup>BiPo TPR | Efficiency |
 |------------------------------|------------------|------------|------------------|------------|
 | Classical Cuts               | 68.66%           | 47.34%     | 99.99%           | 14.54%     |
 | Optimized Cuts               | 61.95%           | 46.81%     | 91.86%           | 51.52%     |
