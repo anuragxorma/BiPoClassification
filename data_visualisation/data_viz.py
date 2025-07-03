@@ -49,34 +49,34 @@ def plot_histogram(data, title, filename, color, time_threshold):
     plt.savefig(filename)
     plt.show()
 
-plot_histogram(time_diff_1_filtered, 'Decay Curve(BiPo214)', 'plots/data_viz/decay_time_bipo214.png', 'blue', time_threshold_1)
-plot_histogram(time_diff_2_filtered, 'Decay Curve (BiPo212)', 'plots/data_viz/decay_time_bipo212.png', 'blue', time_threshold_2)
+plot_histogram(time_diff_1_filtered, r'Decay Curve($^{214}$BiPo)', 'plots/data_viz/decay_time_bipo214.png', 'blue', time_threshold_1)
+plot_histogram(time_diff_2_filtered, r'Decay Curve ($^{212}$BiPo)', 'plots/data_viz/decay_time_bipo212.png', 'blue', time_threshold_2)
 
 # Plot histograms of energies
 plt.figure(figsize=(10, 5))
-plt.hist(df_pandas[df_pandas.truth == 1].energy, bins=100, color='blue', alpha=0.7, label='Bi214')
-plt.hist(df_pandas[df_pandas.truth == 4].energy, bins=100, color='salmon', alpha=0.7, label='Bi212')
+plt.hist(df_pandas[df_pandas.truth == 1].energy, bins=100, color='blue', alpha=0.7, label=r'$^{214}$Bi')
+plt.hist(df_pandas[df_pandas.truth == 4].energy, bins=100, color='salmon', alpha=0.7, label=r'$^{212}$Bi')
 plt.xlabel('Energy [MeV]')
 plt.ylabel('Number of Events')
-plt.title('Energy Distribution of Bi214 and Bi212')
+plt.title(r'Energy Distribution of $^{214}$Bi and $^{212}$Bi')
 plt.legend()
 plt.grid(True)
 plt.savefig('plots/data_viz/energy_bi214_bi212.png')
 plt.show()
 
 plt.figure(figsize=(10, 5))
-plt.hist(df_pandas[df_pandas.truth == 2].energy, bins=100, color='blue', alpha=0.7, label='Po214')
-plt.hist(df_pandas[df_pandas.truth == 5].energy, bins=100, color='salmon', alpha=0.7, label='Po212')
+plt.hist(df_pandas[df_pandas.truth == 2].energy, bins=100, color='blue', alpha=0.7, label=r'$^{214}$Po')
+plt.hist(df_pandas[df_pandas.truth == 5].energy, bins=100, color='salmon', alpha=0.7, label=r'$^{212}$Po')
 plt.xlabel('Energy [MeV]')
 plt.ylabel('Number of Events')
-plt.title('Energy Distribution of Po214 and Po212')
+plt.title(r'Energy Distribution of $^{214}$Po and $^{212}$Po')
 plt.legend()
 plt.grid(True)
 plt.savefig('plots/data_viz/energy_po214_po212.png')
 plt.show()
 
 # Define label names
-label_names = {1: "Bi214", 2: "Po214", 4: "Bi212", 5: "Po212"}
+label_names = {1: r"$^{214}$Bi", 2: r"$^{214}$Po", 4: r"$^{212}$Bi", 5: r"$^{212}$Po"}
 
 # Plot histogram of all energies with truth distributions
 plt.figure(figsize=(12, 6))
@@ -143,16 +143,16 @@ popt_2, _ = curve_fit(decay_function, bin_centers_2_filtered, hist_2_filtered, p
 N0_1, tau_1 = popt_1
 N0_2, tau_2 = popt_2
 
-print(fr"Decay time ($\tau$) for BiPo214: {tau_1:.6f} s")
-print(fr"Decay time (tau) for BiPo212: {tau_2:.9f} s")
+print(fr"Decay time ($\tau$) for $^{214}$BiPo: {tau_1:.6f} s")
+print(fr"Decay time (tau) for $^{212}$BiPo: {tau_2:.9f} s")
 
 # Plot fitted decay curves
 plt.figure(figsize=(10, 5))
-plt.scatter(bin_centers_1, hist_1, label='BiPo214', color='blue', alpha=0.6)
+plt.scatter(bin_centers_1, hist_1, label=r'$^{214}$BiPo', color='blue', alpha=0.6)
 plt.plot(bin_centers_1, decay_function(bin_centers_1, *popt_1), label=fr'Fit: $\tau$={tau_1:.3e}s', color='black')
 plt.xlabel('Time (seconds)')
 plt.ylabel('Number of BiPo Events')
-plt.title('Decay Curve Fitting (BiPo214)')
+plt.title(r'Decay Curve Fitting ($^{214}$BiPo)')
 plt.legend()
 plt.grid()
 plt.savefig('plots/data_viz/decay_fit_bipo214.png')
@@ -160,7 +160,7 @@ plt.show()
 
 # Plot fitted decay curve
 plt.figure(figsize=(10, 5))
-plt.scatter(bin_centers_2_filtered, hist_2_filtered, label='BiPo212', color='red', alpha=0.6)
+plt.scatter(bin_centers_2_filtered, hist_2_filtered, label=r'$^{212}$BiPo', color='red', alpha=0.6)
 plt.plot(
     bin_centers_2_filtered, 
     decay_function(bin_centers_2_filtered, *popt_2), 
@@ -169,7 +169,7 @@ plt.plot(
 )
 plt.xlabel('Time (seconds)')
 plt.ylabel('Number of BiPo Events')
-plt.title('Decay Curve Fitting (BiPo212)')
+plt.title(r'Decay Curve Fitting ($^{212}$BiPo)')
 plt.legend()
 plt.grid()
 plt.savefig('plots/data_viz/decay_fit_bipo212.png')
@@ -187,15 +187,22 @@ label_colors = {1: "blue", 2: "red"}
 
 # Bi214 Histogram (No Fit)
 bi214_energy = df_pandas[df_pandas.truth == 1].energy.values
+
 plt.figure(figsize=(10, 5))
-plt.hist(bi214_energy, bins=100, color=label_colors[1], alpha=0.6, label='Bi214 Data')
+plt.hist(bi214_energy, bins=100, color=label_colors[1], alpha=0.6, label=r'$^{214}$Bi Data')
+
+# Add vertical line for Q-value
+q_value_bi214 = 3.272  # MeV
+plt.axvline(q_value_bi214, color='red', linestyle='--', linewidth=2, label=fr'Q-value ($^{{214}}\mathrm{{Bi}}$ = {q_value_bi214} MeV')
+
 plt.xlabel('Energy [MeV]')
 plt.ylabel('Number of Events')
-plt.title('Bi214 Energy Distribution')
+plt.title(r'$^{214}$Bi Energy Distribution')
 plt.legend()
 plt.grid()
 plt.savefig('plots/data_viz/histogram_bi214.png')
 plt.show()
+
 
 # Po214 Gaussian Fit
 po214_energy = df_pandas[df_pandas.truth == 2].energy.values
@@ -205,10 +212,10 @@ bin_centers_po = (bin_edges_po[:-1] + bin_edges_po[1:]) / 2
 popt_po, _ = curve_fit(gaussian, bin_centers_po, hist_po, p0=[max(hist_po), np.mean(po214_energy), np.std(po214_energy)])
 A_po, mu_po, sigma_po = popt_po
 
-print(f"Po214 Energy Peak: {mu_po:.3f} MeV, Width: {sigma_po:.3f} MeV")
+print(fr"$^{214}$Po Energy Peak: {mu_po:.3f} MeV, Width: {sigma_po:.3f} MeV")
 
 plt.figure(figsize=(10, 5))
-plt.hist(po214_energy, bins=100, color=label_colors[2], alpha=0.6, label='Po214 Data')
+plt.hist(po214_energy, bins=100, color=label_colors[2], alpha=0.6, label=r'$^{214}$Po Data')
 plt.plot(bin_centers_po, gaussian(bin_centers_po, *popt_po), color='black', 
          label=fr'Fit: $\mu$={mu_po:.3f} MeV, $\sigma$={sigma_po:.3f} MeV')
 plt.axvline(mu_po, color='black', linestyle='dashed', label='Mean (μ)')
@@ -216,7 +223,7 @@ plt.axvline(mu_po - sigma_po, color='gray', linestyle='dashed', alpha=0.7, label
 plt.axvline(mu_po + sigma_po, color='gray', linestyle='dashed', alpha=0.7, label='μ + σ')
 plt.xlabel('Energy [MeV]')
 plt.ylabel('Number of Events')
-plt.title('Gaussian Fit for Po214 Energy')
+plt.title(r'Gaussian Fit for $^{214}$Po Energy')
 plt.legend()
 plt.grid()
 plt.savefig('plots/data_viz/gaussian_fit_po214.png')
@@ -225,10 +232,15 @@ plt.show()
 # Bi212 Histogram (No Fit)
 bi212_energy = df_pandas[df_pandas.truth == 4].energy.values
 plt.figure(figsize=(10, 5))
-plt.hist(bi212_energy, bins=100, color=label_colors[1], alpha=0.6, label='Bi212 Data')
+plt.hist(bi212_energy, bins=100, color=label_colors[1], alpha=0.6, label=r'$^{212}$Bi Data')
+
+# Add vertical line for Q-value
+q_value_bi212 = 2.252  # MeV
+plt.axvline(q_value_bi212, color='red', linestyle='--', linewidth=2, label=fr'Q-value ($^{{212}}\mathrm{{Bi}}$ = {q_value_bi212} MeV')
+
 plt.xlabel('Energy [MeV]')
 plt.ylabel('Number of Events')
-plt.title('Bi212 Energy Distribution')
+plt.title(r'$^{212}$Bi Energy Distribution')
 plt.legend()
 plt.grid()
 plt.savefig('plots/data_viz/histogram_bi212.png')
@@ -242,10 +254,10 @@ bin_centers_po = (bin_edges_po[:-1] + bin_edges_po[1:]) / 2
 popt_po, _ = curve_fit(gaussian, bin_centers_po, hist_po, p0=[max(hist_po), np.mean(po212_energy), np.std(po212_energy)])
 A_po, mu_po, sigma_po = popt_po
 
-print(f"Po212 Energy Peak: {mu_po:.3f} MeV, Width: {sigma_po:.3f} MeV")
+print(fr"$^{212}$Po Energy Peak: {mu_po:.3f} MeV, Width: {sigma_po:.3f} MeV")
 
 plt.figure(figsize=(10, 5))
-plt.hist(po212_energy, bins=100, color=label_colors[2], alpha=0.6, label='Po212 Data')
+plt.hist(po212_energy, bins=100, color=label_colors[2], alpha=0.6, label=r'$^{212}$Po Data')
 plt.plot(bin_centers_po, gaussian(bin_centers_po, *popt_po), color='black', 
          label=fr'Fit: $\mu$={mu_po:.3f} MeV, $\sigma$={sigma_po:.3f} MeV')
 plt.axvline(mu_po, color='black', linestyle='dashed', label='Mean (μ)')
@@ -253,7 +265,7 @@ plt.axvline(mu_po - sigma_po, color='gray', linestyle='dashed', alpha=0.7, label
 plt.axvline(mu_po + sigma_po, color='gray', linestyle='dashed', alpha=0.7, label='μ + σ')
 plt.xlabel('Energy [MeV]')
 plt.ylabel('Number of Events')
-plt.title('Gaussian Fit for Po212 Energy')
+plt.title(r'Gaussian Fit for $^{212}$Po Energy')
 plt.legend()
 plt.grid()
 plt.savefig('plots/data_viz/gaussian_fit_po212.png')
