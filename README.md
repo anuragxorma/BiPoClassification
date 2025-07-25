@@ -6,7 +6,7 @@ OSIRIS is the pre-detector of the JUNO experiment, designed to measure radiopuri
 
 The thesis work was carried out using a toy Monte Carlo simulation with an artificially balanced dataset, where all six classes (internal background, external background, and Bi/Po decays) were equally represented, each making up roughly 16% of the data. This setup was useful for training and model comparison, but does not reflect the realistic signal-to-background ratio observed in actual simulations.
 
-> A more realistic simulation with proper background-to-signal ratios has been developed after thesis submission and is available on the [`realistic-sim`](https://github.com/yourusername/BiPoClassification/tree/realistic-sim) branch. This version is intended for future integration into official analysis pipelines.
+> A more realistic simulation with proper background-to-signal ratios has been developed after thesis submission and is available on the [`realistic-sim`](https://github.com/anuragxorma/BiPoClassification/tree/realistic-sim) branch. This version is intended for future integration into official analysis pipelines.
 
 This project demonstrates applied skills in:
 - Data preprocessing and engineering (Pandas, Dask)
