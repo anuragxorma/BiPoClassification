@@ -2,7 +2,7 @@ import numpy as np
 import dask.dataframe as dd
 
 #reading the file using dask
-df = dd.read_csv('../data_preprocessing/osiris_toydata_7.csv', sep=',', header=None)
+df = dd.read_csv('../data_preprocessing/osiris_toydata_6.csv', sep=' ', header=None)
 df = df.rename(columns={0: "time", 1: "energy", 2: "x", 3: "y", 4: "z", 9: "truth"})
 
 #dropping the empty clumns

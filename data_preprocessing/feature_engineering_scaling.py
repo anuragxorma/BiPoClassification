@@ -36,9 +36,6 @@ robust_scaler = RobustScaler()
 
 # Apply Robust Scaling to z and time_diff
 df[['z']] = robust_scaler.fit_transform(df[['z']])
-# Save scalers after fitting
-joblib.dump(min_max_scaler, "../scalers/min_max_scaler.pkl")
-joblib.dump(robust_scaler, "../scalers/robust_scaler.pkl")
 
 #Apply sine transformation to phi to handle periodicity.  Neural networks operate in a Eucledian space so it can confuse the discontinuity between -pi and pi
 

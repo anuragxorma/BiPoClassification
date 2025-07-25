@@ -4,7 +4,7 @@ import numpy as np
 import dask.dataframe as dd
 
 # Reading the file using dask
-df = dd.read_csv('data_preprocessing/osiris_toydata_7.csv', sep=',', header=None)
+df = dd.read_csv('data_preprocessing/osiris_toydata_6.csv', sep=' ', header=None)
 df = df.rename(columns={0: "time", 1: "energy", 2: "x", 3: "y", 4: "z", 9: "truth"})
 
 # Dropping the empty columns
@@ -136,8 +136,14 @@ hist_2_filtered = hist_2[nonzero_indices]
 
 # Fit the exponential decay function
 popt_1, _ = curve_fit(decay_function, bin_centers_1, hist_1, p0=[max(hist_1), 0.0001])
-# Fit the exponential decay function
-popt_2, _ = curve_fit(decay_function, bin_centers_2_filtered, hist_2_filtered, p0=[max(hist_2_filtered), 0.00001])
+# Fit exponential decay with bounds to enforce τ > 0
+popt_2, _ = curve_fit(
+    decay_function,
+    bin_centers_2_filtered,
+    hist_2_filtered,
+    p0=[max(hist_2_filtered), 1e-6],  # Adjust initial guess for τ
+    bounds=([0, 1e-9], [np.inf, 1e-3])  # Ensure τ stays positive and within reasonable range
+)
 
 # Extract fitted parameters
 N0_1, tau_1 = popt_1
