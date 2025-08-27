@@ -212,7 +212,8 @@ This project compares:
 
 ## Thesis
 
-The full thesis describing this work will be made available here once submitted.
+**PDF:** [Anurag Sharma – MSc Thesis](thesis/Anurag_Sharma_MSc_Thesis.pdf)  
+*A concise write-up of the methods, experiments, and results behind this repository.*
 
 ---
 
